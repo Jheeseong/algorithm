@@ -1,4 +1,4 @@
-package inoutput;
+package inoutput.starline;
 
 import java.io.*;
 
