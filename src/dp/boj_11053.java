@@ -1,8 +1,6 @@
 package dp;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.StringTokenizer;
 
 public class boj_11053 {
@@ -21,7 +19,6 @@ public class boj_11053 {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         for (int i = 0; i < T; i++) {
-
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
@@ -40,10 +37,10 @@ public class boj_11053 {
     static int LIS(int n) {
         if (dp[n] == null) {
             dp[n] = 1;
-        }
-        for (int i = n - 1; i >= 0; i--) {
-            if (arr[i] < arr[n]) {
-                dp[n] = Math.max(dp[n], LIS(i) + 1);
+            for (int i = n - 1; i >= 0; i--) {
+                if (arr[i] < arr[n]) {
+                    dp[n] = Math.max(dp[n], LIS(i) + 1);
+                }
             }
         }
         return dp[n];
