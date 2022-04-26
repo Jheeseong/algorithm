@@ -38,7 +38,7 @@ public class boj_11055 {
 
     static int LIS(int n) {
         if (dp[n] == null) {
-            dp[n] = 1;
+            dp[n] = arr[n];
             for (int i = n - 1; i >= 0; i--) {
                 if (arr[i] < arr[n]) {
                     dp[n] = Math.max(dp[n], LIS(i) + arr[n]);
