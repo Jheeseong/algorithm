@@ -8,8 +8,7 @@ import java.util.StringTokenizer;
 public class boj_1912 {
 
     static int arr[];
-    static Integer r_dp[];
-    static Integer i_dp[];
+    static Integer dp[];
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -17,9 +16,7 @@ public class boj_1912 {
         int T = Integer.parseInt(br.readLine());
 
         arr = new int[T];
-        r_dp = new Integer[T];
-        i_dp = new Integer[T];
-
+        dp = new Integer[T];
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         for (int i = 0; i < T; i++) {
@@ -27,40 +24,27 @@ public class boj_1912 {
         }
 
         for (int i = 0; i < T; i++) {
-            LIS(i);
-            LDS(i);
+            recur(i);
         }
 
 
-        int max = r_dp[0] + i_dp[0] - 1;
+        int max = dp[0];
 
         for (int i = 1; i < T; i++) {
-            max = Math.max(max, r_dp[i] + i_dp[i] - 1);
+            max = Math.max(max, dp[i]);
         }
         System.out.println(max);
     }
 
-    static int LIS(int n) {
-        if (r_dp[n] == null) {
-            r_dp[n] = 1;
-            for (int i = n - 1; i >= 0; i--) {
-                if (arr[i] < arr[n]) {
-                    r_dp[n] = Math.max(r_dp[n], LIS(i) + 1);
-                }
+    static int recur(int n) {
+        if (dp[n] == null) {
+            if (n == 0) {
+                dp[0] = arr[0];
+            }else {
+                dp[n] = Math.max(recur(n-1) + arr[n], arr[n]);
             }
-        }
-        return r_dp[n];
-    }
 
-    static int LDS(int n) {
-        if (i_dp[n] == null) {
-            i_dp[n] = 1;
-            for (int i = n + 1; i < i_dp.length; i++) {
-                if (arr[i] < arr[n]) {
-                    i_dp[n] = Math.max(i_dp[n], LDS(i) + 1);
-                }
-            }
         }
-        return i_dp[n];
+        return dp[n];
     }
 }
