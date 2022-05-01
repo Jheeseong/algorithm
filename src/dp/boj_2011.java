@@ -31,12 +31,19 @@ public class boj_2011 {
         if (dp[n] == null) {
             for (int i = 2; i <= n; i++) {
                 int now = i - 1;
-                if (str.charAt(now) > '0') {
+                if (str.charAt(now) == '0') {
+                    if (str.charAt(now - 1) > '0' && str.charAt(now - 1) < '3') {
+                        dp[i] = dp[i - 2];
+                    } else {
+                        return 0;
+                    }
+                } else if (str.charAt(now) > '0') {
+
                     dp[i] = dp[i - 1];
-                }
-                int su = (str.charAt(now - 1) - '0') * 10 + (str.charAt(now) - '0');
-                if (su >= 10 && su <= 26) {
-                    dp[i] = (dp[i] + dp[i - 2]) % mod;
+                    int su = (str.charAt(now - 1) - '0') * 10 + (str.charAt(now) - '0');
+                    if (su >= 10 && su <= 26) {
+                        dp[i] = (dp[i] + dp[i - 2]) % mod;
+                    }
                 }
             }
         }
