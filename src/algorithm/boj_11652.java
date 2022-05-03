@@ -3,31 +3,35 @@ package algorithm;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class boj_11652 {
-    static int cnt[];
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
         int T = Integer.parseInt(br.readLine());
 
-        cnt = new int[100001];
+        long card[] = new long[T];
         for (int i = 0; i < T; i++) {
-            cnt[Integer.parseInt(br.readLine())] ++;
+            card[i] = Long.parseLong(br.readLine());
         }
-        br.close();
+        Arrays.sort(card);
 
-        for (int i = 1; i < 100001; i++) {
-            if (cnt[i] > 0) {
-                int max = Math.max(cnt[i], cnt[i - 1]);
-                if (cnt[i] == max) {
-                    sb.append(i);
-                    break;
-                }
+        int cnt = 1, Max = 1;
+        long ans = card[0];
+        for (int i = 1; i < T; i++) {
+            if (card[i] == card[i - 1]) {
+                cnt += 1;
+            } else {
+                cnt = 1;
             }
-
+            if (Max < cnt) {
+                Max = cnt;
+                ans = card[i];
+            }
         }
+        sb.append(ans).append("\n");
         System.out.println(sb);
     }
 }
