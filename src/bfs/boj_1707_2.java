@@ -23,7 +23,7 @@ public class boj_1707_2 {
 
             check = new int[1001][1001];
             checked = new boolean[1001];
-            color = new int[1001];
+            color = new int[V+1];
 
             for (int i = 0; i < E; i++) {
                 st = new StringTokenizer(br.readLine());

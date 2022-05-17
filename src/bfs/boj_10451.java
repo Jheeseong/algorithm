@@ -5,52 +5,59 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class boj_10451 {
+    static ArrayList<ArrayList<Integer>> check;
+    static boolean[] checked;
+    static int N;
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st;
 
         int T = Integer.parseInt(br.readLine());
         while (T-- > 0) {
-            int N = Integer.parseInt(br.readLine());
-            ArrayList<ArrayList<Integer>> a = new ArrayList<>(); // 연결 리스트
+            N = Integer.parseInt(br.readLine());
+            check = new ArrayList<>(); // 연결 리스트
             for (int i = 0; i <= N; i++) {
-                a.add(new ArrayList<>());
+                check.add(new ArrayList<>());
             }
 
             st = new StringTokenizer(br.readLine());
             for (int i = 1; i <= N; i++) {
                 int t = Integer.parseInt(st.nextToken());
-                a.get(i).add(t);
+                check.get(i).add(t);
             }
 
-            boolean[] visited = new boolean[N + 1];
+            checked = new boolean[N + 1];
             int cnt = 0;
             for (int i = 1; i <= N; i++) {
-                if (!visited[i]) {
-                    visited[i] = true;
-                    DFS(a, visited, i);
+                if (!checked[i]) {
+                    bfs(i);
                     cnt++;
                 }
             }
-            bw.write(cnt + "\n");
+            System.out.println(cnt);
         }
-
-        bw.flush();
-        bw.close();
-        br.close();
     }
 
-    // DFS를 통해서 start와 연결된 점을 visited[i] = true로 처리함.
-    public static void DFS(ArrayList<ArrayList<Integer>> a, boolean[] visited, int start) {
 
-        for (int i : a.get(start)) {
-            if (!visited[i]) {
-                visited[i] = true;
-                DFS(a, visited, i);
+    static public void bfs(int start) {
+        Queue<Integer> queue = new LinkedList<Integer>();
+        queue.offer(start);
+        checked[start] = true;
+
+        while (!queue.isEmpty()) {
+            int temp = queue.poll();
+
+            for (int i = 0; i < check.get(temp).size(); i++) {
+                if (!checked[check.get(temp).get(i)]) {
+                    checked[check.get(temp).get(i)] = true;
+                    queue.offer(check.get(temp).get(i));
+                }
             }
         }
     }
