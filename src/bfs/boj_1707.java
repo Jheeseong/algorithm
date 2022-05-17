@@ -40,13 +40,13 @@ public class boj_1707 {
             for (int i = 0; i < n; i++) {
                 if (color[i] == 0) {
                     color[i] = 1;
-                    bfs(n, i);
+                    bfs(i);
                 }
             }
             System.out.println(check(n));
         }
     }
-    static public void bfs(int N, int start) {
+    static public void bfs(int start) {
         Queue<Integer> queue = new LinkedList<>();
 
         queue.offer(start);
