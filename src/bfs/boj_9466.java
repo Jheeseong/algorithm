@@ -34,19 +34,16 @@ public class boj_9466 {
     }
 
     public static void explore(int start) {
-        visit[start] = true;
-
-        if (!visit[arr[start]]) {
-            explore(arr[start]);
-        } else {
-            if (!done[arr[start]]) {
-                cnt++;
-                while (arr[start] != start) {
-                    cnt++;
-                    arr[start] = arr[arr[start]];
-                }
-            }
+        if (done[start]) {
+            return;
         }
+        if (visit[start]) {
+            done[start] = true;
+            cnt++;
+        }
+        visit[start] = true;
+        explore(arr[start]);
         done[start] = true;
+        visit[start] = false;
     }
 }
