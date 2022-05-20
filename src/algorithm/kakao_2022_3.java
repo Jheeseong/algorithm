@@ -1,10 +1,7 @@
 package algorithm;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class kakao_2022_3 {
     public static void main(String[] args) {
@@ -12,6 +9,7 @@ public class kakao_2022_3 {
 
 
     public static int[] solution(int[] fees, String[] records) {
+        int lastTime = getMin("23:59");
         Map<String, Integer> parking = new HashMap<>();
         Map<String, Integer> times = new HashMap<>();
         List<String> cars = new ArrayList<>();
@@ -28,10 +26,24 @@ public class kakao_2022_3 {
 
             if (parking.containsKey(car_num)) {
                 times.put(car_num, times.get(car_num) + (time - parking.get(car_num)));
+                parking.remove(car_num);
             }
 
         }
         int[] ret = new int[cars.size()];
+        Collections.sort(cars);
+
+        for (int i = 0; i < cars.size(); i++) {
+            ret[i] =fees[1];
+            String car = cars.get(i);
+            int time = times.get(car) - fees[0];
+            if (parking.containsKey(car)) {
+                time += (lastTime - parking.get(car));
+            }
+            if (time > 0) {
+                ret[i] += (Math.ceil(time / (fees[2] * 1.0)) * fees[3]);
+            }
+        }
         return ret;
     }
 
