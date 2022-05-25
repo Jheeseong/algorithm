@@ -15,6 +15,7 @@ public class samsung_sw_2 {
             String s2 = "";
             ArrayList<Integer> list = new ArrayList<>();
             s = br.readLine();
+            int arr[] = new int[s.length()];
             for (int j = 0; j < s.length(); j++) {
                 list.add((int) s.charAt(j) - '0');
             }
@@ -28,19 +29,25 @@ public class samsung_sw_2 {
                 if (list.get(0) == 0) {
                     break;
                 }
-                for (int j = 0; j < s.length(); j++) {
+                for (int j = 0; j < list.size(); j++) {
                     for (int k = 0; k < list.size(); k++) {
                         if ((s2.charAt(j) - '0') == list.get(k)) {
-                            cnt++;
+                            arr[j] += 1;
                         }
                     }
                 }
-                if (cnt == s.length()) {
+                for (int j = 0; j < arr.length; j++) {
+                    if (arr[j] == 1) {
+                        cnt++;
+                    }
+                }
+                if (cnt == list.size()) {
                     System.out.println("#" + i + " possible");
                     break;
                 } else {
                     a++;
                     cnt = 0;
+                    arr = new int[list.size()];
                 }
             }
             if (cnt != list.size()) {
