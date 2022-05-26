@@ -2,10 +2,9 @@ package algorithm;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class samsug_sw_5 {
+public class samsung_sw_5 {
     public static void main(String args[]) throws Exception
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
