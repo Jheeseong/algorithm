@@ -22,7 +22,7 @@ public class samsung_sw_8 {
             done = new int[N];
 
             check(0);
-            System.out.println(cnt);
+            System.out.println("#" + tn + " " + cnt);
         }
     }
 
