@@ -10,6 +10,7 @@ public class boj_1373 {
         StringBuilder sb = new StringBuilder();
         String N = br.readLine();
 
+
         if(N.length() % 3 == 1)
             sb.append(N.charAt(0));
         if(N.length() % 3 == 2)

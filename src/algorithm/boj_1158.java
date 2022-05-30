@@ -27,6 +27,7 @@ public class boj_1158 {
             for (int i = 0; i < N - 1; i++) {
                 list.offer(list.poll());
             }
+            //3번 째 값 출력
             sb.append(list.poll() + ", ");
         }
         sb.append(list.poll() + ">");

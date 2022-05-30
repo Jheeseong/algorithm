@@ -11,6 +11,7 @@ public class boj_1676 {
         int N = Integer.parseInt(br.readLine());
         int cnt = 0;
 
+        //5를 나누면서 누적합 계산
         while (N >= 5) {
             cnt += N / 5;
             N /= 5;
